@@ -7,9 +7,9 @@ import { ScheduleMeetingDialog } from "@/components/ScheduleMeetingDialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Users, Calendar, TrendingUp, Network, Search, Plus } from "lucide-react";
+import { Users, Calendar, TrendingUp, Network, Search, ArrowUpRight } from "lucide-react";
 
-// Mock data - in production this would come from your backend
+// Mock data
 const mockMembers = [
   { id: "1", name: "Sarah Johnson", role: "Product Designer", meetingsCount: 3, lastMet: "2 days ago" },
   { id: "2", name: "Michael Chen", role: "Software Engineer", meetingsCount: 5, lastMet: "1 week ago" },
@@ -17,6 +17,8 @@ const mockMembers = [
   { id: "4", name: "James Brown", role: "Data Analyst", meetingsCount: 4, lastMet: "5 days ago" },
   { id: "5", name: "Olivia Davis", role: "UX Researcher", meetingsCount: 1 },
   { id: "6", name: "Daniel Martinez", role: "Product Manager", meetingsCount: 6, lastMet: "1 day ago" },
+  { id: "7", name: "Sophie Anderson", role: "Frontend Developer", meetingsCount: 2, lastMet: "4 days ago" },
+  { id: "8", name: "Marcus Lee", role: "Business Analyst", meetingsCount: 3, lastMet: "6 days ago" },
 ];
 
 const mockMeetings = [
@@ -27,7 +29,7 @@ const mockMeetings = [
     time: "14:00",
     location: "Zoom",
     status: "upcoming" as const,
-    notes: "Discuss design system updates",
+    notes: "Discuss design system updates and component library structure",
   },
   {
     id: "2",
@@ -36,7 +38,16 @@ const mockMeetings = [
     time: "10:30",
     location: "Coffee Lab",
     status: "completed" as const,
-    notes: "Great conversation about technical architecture",
+    notes: "Great conversation about technical architecture and scalability considerations",
+  },
+  {
+    id: "3",
+    withName: "Emma Williams",
+    date: "2025-01-16",
+    time: "15:30",
+    location: "Office - Room 301",
+    status: "upcoming" as const,
+    notes: "Review marketing strategy for Q2 product launch",
   },
 ];
 
@@ -71,80 +82,102 @@ const Index = () => {
   const networkCoverage = Math.round((completedMeetings / (totalMembers - 1)) * 100);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-secondary/10">
+    <div className="min-h-screen bg-background">
       <Navbar />
       
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-16 text-center">
-        <div className="max-w-3xl mx-auto space-y-6">
-          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent leading-tight">
-            Track Your Cohort Connections
-          </h1>
-          <p className="text-xl text-muted-foreground">
-            Schedule, log, and track meetings with your classmates. Build meaningful connections across your entire cohort.
-          </p>
-          <div className="flex items-center justify-center gap-4 pt-4">
-            <Button size="lg" className="bg-gradient-to-r from-primary to-accent hover:opacity-90 text-base">
-              <Calendar className="w-5 h-5 mr-2" />
-              Schedule Meeting
-            </Button>
-            <Button size="lg" variant="outline" className="text-base">
-              View Dashboard
-            </Button>
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-[var(--gradient-mesh)] opacity-40" />
+        
+        <div className="relative container mx-auto px-6 pt-20 pb-24">
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-muted border border-border/50 mb-6">
+              <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+              <span className="text-[12px] font-medium text-foreground">Now in beta</span>
+            </div>
+            
+            <h1 className="text-[56px] leading-[1.1] font-semibold text-foreground tracking-tight mb-5">
+              Network intelligence<br />for your cohort
+            </h1>
+            
+            <p className="text-[17px] text-muted-foreground leading-relaxed mb-8 max-w-2xl">
+              Track meetings, analyze connections, and build meaningful relationships across your entire cohort. 
+              A sophisticated platform designed for professional networking.
+            </p>
+            
+            <div className="flex items-center gap-3">
+              <Button size="lg" className="h-11 px-6 text-[14px] font-medium bg-foreground hover:bg-foreground/90 text-background">
+                Get started
+                <ArrowUpRight className="w-4 h-4 ml-1.5" />
+              </Button>
+              <Button size="lg" variant="outline" className="h-11 px-6 text-[14px] font-medium">
+                View demo
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section id="stats" className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Stats Grid */}
+      <section className="container mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <StatsCard
-            title="Total Members"
+            title="Active members"
             value={totalMembers}
-            description="Active cohort members"
+            description="In your cohort"
             icon={Users}
           />
           <StatsCard
-            title="Total Meetings"
+            title="Total meetings"
             value={totalMeetings}
             description="Scheduled & completed"
             icon={Calendar}
             trend={{ value: "+12%", positive: true }}
           />
           <StatsCard
-            title="Network Coverage"
+            title="Network coverage"
             value={`${networkCoverage}%`}
             description="Of possible connections"
             icon={Network}
           />
           <StatsCard
-            title="Upcoming"
+            title="This week"
             value={upcomingMeetings}
-            description="Meetings this week"
+            description="Upcoming meetings"
             icon={TrendingUp}
           />
         </div>
       </section>
 
-      {/* Main Dashboard */}
-      <section id="dashboard" className="container mx-auto px-4 py-12">
-        <Tabs defaultValue="members" className="space-y-6">
-          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2">
-            <TabsTrigger value="members">Members</TabsTrigger>
-            <TabsTrigger value="meetings">Meetings</TabsTrigger>
-          </TabsList>
+      {/* Main Content */}
+      <section className="container mx-auto px-6 pb-24">
+        <Tabs defaultValue="directory" className="space-y-8">
+          <div className="flex items-center justify-between">
+            <TabsList className="h-10 p-1 bg-muted/50 border border-border/50">
+              <TabsTrigger value="directory" className="text-[13px] font-medium px-4 data-[state=active]:bg-background">
+                Directory
+              </TabsTrigger>
+              <TabsTrigger value="meetings" className="text-[13px] font-medium px-4 data-[state=active]:bg-background">
+                Meetings
+              </TabsTrigger>
+            </TabsList>
+          </div>
 
-          <TabsContent value="members" className="space-y-6">
-            <div className="flex items-center gap-4">
-              <div className="relative flex-1">
+          <TabsContent value="directory" className="space-y-6 mt-8">
+            <div className="flex items-center gap-3">
+              <div className="relative flex-1 max-w-md">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
                   placeholder="Search members..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10"
+                  className="pl-10 h-10 text-[13px] bg-background border-border/50"
                 />
               </div>
+              
+              <Button variant="outline" className="h-10 px-4 text-[13px] font-medium">
+                Filters
+              </Button>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -158,16 +191,21 @@ const Index = () => {
             </div>
           </TabsContent>
 
-          <TabsContent value="meetings" className="space-y-6">
+          <TabsContent value="meetings" className="space-y-6 mt-8">
             <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold">Your Meetings</h2>
-              <Button className="bg-gradient-to-r from-primary to-accent hover:opacity-90">
-                <Plus className="w-4 h-4 mr-2" />
-                Log Meeting
+              <div>
+                <h2 className="text-[24px] font-semibold text-foreground mb-1">Your meetings</h2>
+                <p className="text-[13px] text-muted-foreground">
+                  {meetings.length} total · {upcomingMeetings} upcoming
+                </p>
+              </div>
+              
+              <Button className="h-10 px-4 text-[13px] font-medium bg-foreground hover:bg-foreground/90 text-background">
+                Log meeting
               </Button>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3">
               {meetings.map((meeting) => (
                 <MeetingCard key={meeting.id} meeting={meeting} />
               ))}

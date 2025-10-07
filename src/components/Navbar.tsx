@@ -1,37 +1,42 @@
-import { Calendar, Users, BarChart3 } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export const Navbar = () => {
   return (
-    <nav className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-            <Calendar className="w-5 h-5 text-primary-foreground" />
+    <nav className="border-b border-border/40 backdrop-blur-xl bg-background/80 sticky top-0 z-50">
+      <div className="container mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="flex items-center gap-12">
+          <div className="flex items-center gap-3">
+            <div className="w-7 h-7 rounded-md bg-foreground" />
+            <span className="text-[15px] font-semibold tracking-tight text-foreground">
+              meetwise
+            </span>
           </div>
-          <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            MeetTrack
-          </span>
+          
+          <div className="hidden lg:flex items-center gap-8">
+            <a href="#dashboard" className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors">
+              Dashboard
+            </a>
+            <a href="#directory" className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors">
+              Directory
+            </a>
+            <a href="#analytics" className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors">
+              Analytics
+            </a>
+          </div>
         </div>
         
-        <div className="hidden md:flex items-center gap-6">
-          <a href="#dashboard" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-            Dashboard
-          </a>
-          <a href="#members" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-            Members
-          </a>
-          <a href="#meetings" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-            Meetings
-          </a>
-          <a href="#stats" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-            Statistics
-          </a>
+        <div className="flex items-center gap-3">
+          <Button variant="ghost" size="sm" className="hidden lg:flex text-[13px] font-medium">
+            Sign in
+          </Button>
+          <Button size="sm" className="bg-foreground text-background hover:bg-foreground/90 text-[13px] font-medium">
+            Get started
+          </Button>
+          <Button variant="ghost" size="icon" className="lg:hidden">
+            <Menu className="w-5 h-5" />
+          </Button>
         </div>
-        
-        <Button className="bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity">
-          Get Started
-        </Button>
       </div>
     </nav>
   );

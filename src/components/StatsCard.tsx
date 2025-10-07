@@ -14,24 +14,26 @@ interface StatsCardProps {
 
 export const StatsCard = ({ title, value, description, icon: Icon, trend }: StatsCardProps) => {
   return (
-    <Card className="p-6 hover:shadow-lg transition-all duration-300 border-border">
-      <div className="flex items-start justify-between">
-        <div className="space-y-2">
-          <p className="text-sm font-medium text-muted-foreground">{title}</p>
-          <div className="flex items-baseline gap-2">
-            <h3 className="text-3xl font-bold text-foreground">{value}</h3>
-            {trend && (
-              <span className={`text-sm font-medium ${trend.positive ? "text-green-600" : "text-red-600"}`}>
-                {trend.value}
-              </span>
-            )}
+    <Card className="p-6 border-border/50 bg-card hover:shadow-[0_4px_6px_-1px_rgb(0_0_0_/0.05),0_2px_4px_-2px_rgb(0_0_0_/0.03)] transition-all duration-300">
+      <div className="flex items-start justify-between mb-4">
+        <div className="flex items-center gap-2.5">
+          <div className="w-9 h-9 rounded-lg bg-muted flex items-center justify-center">
+            <Icon className="w-4.5 h-4.5 text-foreground" />
           </div>
-          <p className="text-xs text-muted-foreground">{description}</p>
+          <p className="text-[13px] font-medium text-muted-foreground">{title}</p>
         </div>
-        
-        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-          <Icon className="w-6 h-6 text-primary-foreground" />
+      </div>
+      
+      <div className="space-y-1">
+        <div className="flex items-baseline gap-2">
+          <h3 className="text-3xl font-semibold text-foreground tracking-tight">{value}</h3>
+          {trend && (
+            <span className={`text-[12px] font-medium ${trend.positive ? "text-accent" : "text-destructive"}`}>
+              {trend.value}
+            </span>
+          )}
         </div>
+        <p className="text-[12px] text-muted-foreground/80">{description}</p>
       </div>
     </Card>
   );
