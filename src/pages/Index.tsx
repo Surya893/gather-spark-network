@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { Session } from "@supabase/supabase-js";
 import { Navbar } from "@/components/Navbar";
 import { MemberCard } from "@/components/MemberCard";
 import { MeetingCard } from "@/components/MeetingCard";
@@ -52,10 +55,30 @@ const mockMeetings = [
 ];
 
 const Index = () => {
+  const navigate = useNavigate();
+  const [session, setSession] = useState<Session | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [scheduleDialogOpen, setScheduleDialogOpen] = useState(false);
   const [selectedMember, setSelectedMember] = useState<string>("");
   const [meetings, setMeetings] = useState(mockMeetings);
+
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      setSession(session);
+      if (session) {
+        navigate("/dashboard");
+      }
+    });
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      if (session) {
+        navigate("/dashboard");
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [navigate]);
 
   const handleScheduleMeeting = (memberName: string) => {
     setSelectedMember(memberName);
