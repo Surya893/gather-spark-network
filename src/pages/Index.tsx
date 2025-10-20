@@ -109,103 +109,118 @@ const Index = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative">
-        <div className="container mx-auto px-6 pt-24 pb-20 lg:pt-32 lg:pb-28">
+      <section className="relative bg-gradient-to-b from-background to-muted/20">
+        <div className="container mx-auto px-6 pt-20 pb-16 lg:pt-28 lg:pb-20">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-6 tracking-tight">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-8">
+              <span className="text-sm font-medium text-primary">Now available</span>
+            </div>
+            
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
               Scheduling infrastructure
               <br />
-              for your cohort
+              for meaningful connections
             </h1>
             
             <p className="text-lg lg:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-              Build meaningful connections through structured one-on-ones. Track meetings, manage relationships, and strengthen your network—all in one place.
+              Build stronger relationships through structured one-on-ones. Track meetings, manage your network, and never miss an opportunity to connect.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button size="lg" className="h-12 px-8 text-base font-medium">
+              <Button size="lg" className="h-12 px-8 text-base font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-shadow">
                 Get started free
-                <ArrowUpRight className="w-4 h-4 ml-2" />
+                <ArrowUpRight className="w-5 h-5 ml-2" />
               </Button>
-              <Button size="lg" variant="outline" className="h-12 px-8 text-base font-medium">
+              <Button size="lg" variant="outline" className="h-12 px-8 text-base font-semibold border-2">
                 Book a demo
               </Button>
             </div>
             
-            <p className="text-sm text-muted-foreground mt-6">
-              No credit card required • Free forever for individuals
+            <p className="text-sm text-muted-foreground mt-8 flex items-center justify-center gap-6">
+              <span className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                No credit card required
+              </span>
+              <span className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                Free forever
+              </span>
             </p>
           </div>
         </div>
       </section>
 
       {/* Stats Grid */}
-      <section className="border-t border-border bg-muted/30">
-        <div className="container mx-auto px-6 py-12">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+      <section className="border-y border-border bg-card">
+        <div className="container mx-auto px-6 py-16">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 max-w-5xl mx-auto">
             <div className="text-center">
-              <div className="text-3xl lg:text-4xl font-bold text-foreground mb-2">{totalMembers}</div>
-              <div className="text-sm text-muted-foreground">Active members</div>
+              <div className="text-4xl lg:text-5xl font-bold text-primary mb-2">{totalMembers}</div>
+              <div className="text-sm font-medium text-muted-foreground">Active members</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl lg:text-4xl font-bold text-foreground mb-2">{totalMeetings}</div>
-              <div className="text-sm text-muted-foreground">Total meetings</div>
+              <div className="text-4xl lg:text-5xl font-bold text-primary mb-2">{totalMeetings}</div>
+              <div className="text-sm font-medium text-muted-foreground">Total meetings</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl lg:text-4xl font-bold text-foreground mb-2">{networkCoverage}%</div>
-              <div className="text-sm text-muted-foreground">Coverage</div>
+              <div className="text-4xl lg:text-5xl font-bold text-primary mb-2">{networkCoverage}%</div>
+              <div className="text-sm font-medium text-muted-foreground">Network coverage</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl lg:text-4xl font-bold text-foreground mb-2">{upcomingMeetings}</div>
-              <div className="text-sm text-muted-foreground">This week</div>
+              <div className="text-4xl lg:text-5xl font-bold text-primary mb-2">{upcomingMeetings}</div>
+              <div className="text-sm font-medium text-muted-foreground">This week</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Main Content */}
-      <section className="container mx-auto px-6 py-16">
-        <Tabs defaultValue="directory" className="space-y-8">
+      <section className="container mx-auto px-6 py-20">
+        <Tabs defaultValue="directory" className="space-y-10">
           <div className="border-b border-border">
             <TabsList className="h-auto p-0 bg-transparent border-0">
               <TabsTrigger 
                 value="directory" 
-                className="rounded-none border-b-2 border-transparent data-[state=active]:border-foreground data-[state=active]:bg-transparent px-6 py-3"
+                className="relative rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:text-primary px-6 py-4 text-base font-semibold text-muted-foreground hover:text-foreground transition-colors"
               >
-                Directory
+                Member Directory
               </TabsTrigger>
               <TabsTrigger 
                 value="meetings" 
-                className="rounded-none border-b-2 border-transparent data-[state=active]:border-foreground data-[state=active]:bg-transparent px-6 py-3"
+                className="relative rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:text-primary px-6 py-4 text-base font-semibold text-muted-foreground hover:text-foreground transition-colors"
               >
-                Meetings
+                My Meetings
               </TabsTrigger>
             </TabsList>
           </div>
 
-          <TabsContent value="directory" className="space-y-6 mt-8">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <TabsContent value="directory" className="space-y-8 mt-0">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
               <div>
-                <h2 className="text-2xl font-semibold text-foreground">Member directory</h2>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Connect with {totalMembers} members in your cohort
+                <h2 className="text-3xl font-bold text-foreground mb-2">Connect with your cohort</h2>
+                <p className="text-base text-muted-foreground">
+                  {totalMembers} members ready to connect
                 </p>
               </div>
               
               <div className="flex items-center gap-3 w-full sm:w-auto">
-                <div className="relative flex-1 sm:flex-initial sm:w-72">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <div className="relative flex-1 sm:flex-initial sm:w-80">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                   <Input
-                    placeholder="Search members..."
+                    placeholder="Search by name or role..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10 h-10"
+                    className="pl-12 h-12 text-base border-2 focus:border-primary focus:ring-primary"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredMembers.map((member) => (
                 <MemberCard
                   key={member.id}
@@ -216,21 +231,21 @@ const Index = () => {
             </div>
           </TabsContent>
 
-          <TabsContent value="meetings" className="space-y-6 mt-8">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <TabsContent value="meetings" className="space-y-8 mt-0">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
               <div>
-                <h2 className="text-2xl font-semibold text-foreground">Your meetings</h2>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {meetings.length} total • {upcomingMeetings} upcoming
+                <h2 className="text-3xl font-bold text-foreground mb-2">Your meetings</h2>
+                <p className="text-base text-muted-foreground">
+                  {meetings.length} total meetings • {upcomingMeetings} upcoming
                 </p>
               </div>
               
-              <Button className="h-10 px-5">
-                Log meeting
+              <Button className="h-12 px-6 text-base font-semibold shadow-md hover:shadow-lg transition-shadow">
+                + Log meeting
               </Button>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-4">
               {meetings.map((meeting) => (
                 <MeetingCard key={meeting.id} meeting={meeting} />
               ))}

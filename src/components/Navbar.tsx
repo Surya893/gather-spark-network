@@ -36,40 +36,44 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="border-b border-border bg-background sticky top-0 z-50">
-      <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-8">
+    <nav className="border-b border-border bg-background/95 backdrop-blur-md sticky top-0 z-50">
+      <div className="container mx-auto px-6 h-20 flex items-center justify-between">
+        <div className="flex items-center gap-12">
           <div 
-            className="flex items-center gap-2 cursor-pointer" 
+            className="flex items-center gap-2.5 cursor-pointer group" 
             onClick={() => navigate(user ? "/dashboard" : "/")}
           >
-            <div className="w-6 h-6 rounded bg-foreground flex items-center justify-center">
-              <UsersIcon className="w-3.5 h-3.5 text-background" />
+            <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center group-hover:bg-primary/90 transition-colors">
+              <UsersIcon className="w-5 h-5 text-primary-foreground" />
             </div>
-            <span className="text-base font-semibold text-foreground">
+            <span className="text-xl font-bold text-foreground">
               MeetWise
             </span>
           </div>
           
           {user && (
-            <div className="hidden lg:flex items-center gap-6">
-              <a href="/dashboard" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <div className="hidden lg:flex items-center gap-8">
+              <a href="/dashboard" className="text-base font-medium text-muted-foreground hover:text-primary transition-colors">
                 Dashboard
+              </a>
+              <a href="/dashboard" className="text-base font-medium text-muted-foreground hover:text-primary transition-colors">
+                Analytics
               </a>
             </div>
           )}
         </div>
         
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
           {user ? (
             <>
-              <span className="hidden lg:block text-sm text-muted-foreground">
+              <span className="hidden lg:block text-sm font-medium text-muted-foreground px-4 py-2 rounded-lg bg-muted">
                 {user.user_metadata?.full_name || user.email}
               </span>
               <Button 
                 onClick={handleSignOut} 
-                variant="ghost" 
-                size="sm"
+                variant="outline"
+                size="default"
+                className="font-semibold border-2"
               >
                 Sign out
               </Button>
@@ -78,17 +82,18 @@ export const Navbar = () => {
             <>
               <Button 
                 variant="ghost" 
-                size="sm" 
-                className="hidden lg:flex"
+                size="default"
+                className="hidden lg:flex font-semibold"
                 onClick={() => navigate("/auth")}
               >
                 Sign in
               </Button>
               <Button 
-                size="sm"
+                size="default"
+                className="font-semibold shadow-lg shadow-primary/25"
                 onClick={() => navigate("/auth")}
               >
-                Get started
+                Get started free
               </Button>
             </>
           )}
