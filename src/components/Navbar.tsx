@@ -36,24 +36,24 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="border-b border-border/40 backdrop-blur-xl bg-background/80 sticky top-0 z-50">
+    <nav className="border-b border-border bg-background sticky top-0 z-50">
       <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-12">
+        <div className="flex items-center gap-8">
           <div 
-            className="flex items-center gap-3 cursor-pointer" 
+            className="flex items-center gap-2 cursor-pointer" 
             onClick={() => navigate(user ? "/dashboard" : "/")}
           >
-            <div className="w-7 h-7 rounded-md bg-foreground flex items-center justify-center">
-              <UsersIcon className="w-4 h-4 text-background" />
+            <div className="w-6 h-6 rounded bg-foreground flex items-center justify-center">
+              <UsersIcon className="w-3.5 h-3.5 text-background" />
             </div>
-            <span className="text-[15px] font-semibold tracking-tight text-foreground">
-              meetwise
+            <span className="text-base font-semibold text-foreground">
+              MeetWise
             </span>
           </div>
           
           {user && (
-            <div className="hidden lg:flex items-center gap-8">
-              <a href="/dashboard" className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors">
+            <div className="hidden lg:flex items-center gap-6">
+              <a href="/dashboard" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 Dashboard
               </a>
             </div>
@@ -63,17 +63,15 @@ export const Navbar = () => {
         <div className="flex items-center gap-3">
           {user ? (
             <>
-              <span className="hidden lg:block text-[13px] text-muted-foreground">
+              <span className="hidden lg:block text-sm text-muted-foreground">
                 {user.user_metadata?.full_name || user.email}
               </span>
               <Button 
                 onClick={handleSignOut} 
                 variant="ghost" 
-                size="sm" 
-                className="text-[13px] font-medium"
+                size="sm"
               >
-                <LogOut className="w-4 h-4 mr-2" />
-                Sign Out
+                Sign out
               </Button>
             </>
           ) : (
@@ -81,14 +79,13 @@ export const Navbar = () => {
               <Button 
                 variant="ghost" 
                 size="sm" 
-                className="hidden lg:flex text-[13px] font-medium"
+                className="hidden lg:flex"
                 onClick={() => navigate("/auth")}
               >
                 Sign in
               </Button>
               <Button 
-                size="sm" 
-                className="bg-foreground text-background hover:bg-foreground/90 text-[13px] font-medium"
+                size="sm"
                 onClick={() => navigate("/auth")}
               >
                 Get started

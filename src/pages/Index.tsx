@@ -109,98 +109,100 @@ const Index = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-[var(--gradient-mesh)] opacity-40" />
-        
-        <div className="relative container mx-auto px-6 pt-20 pb-24">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-muted border border-border/50 mb-6">
-              <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-              <span className="text-[12px] font-medium text-foreground">Now in beta</span>
-            </div>
-            
-            <h1 className="text-[56px] leading-[1.1] font-semibold text-foreground tracking-tight mb-5">
-              Network intelligence<br />for your cohort
+      <section className="relative">
+        <div className="container mx-auto px-6 pt-24 pb-20 lg:pt-32 lg:pb-28">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-6 tracking-tight">
+              Scheduling infrastructure
+              <br />
+              for your cohort
             </h1>
             
-            <p className="text-[17px] text-muted-foreground leading-relaxed mb-8 max-w-2xl">
-              Track meetings, analyze connections, and build meaningful relationships across your entire cohort. 
-              A sophisticated platform designed for professional networking.
+            <p className="text-lg lg:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
+              Build meaningful connections through structured one-on-ones. Track meetings, manage relationships, and strengthen your network—all in one place.
             </p>
             
-            <div className="flex items-center gap-3">
-              <Button size="lg" className="h-11 px-6 text-[14px] font-medium bg-foreground hover:bg-foreground/90 text-background">
-                Get started
-                <ArrowUpRight className="w-4 h-4 ml-1.5" />
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button size="lg" className="h-12 px-8 text-base font-medium">
+                Get started free
+                <ArrowUpRight className="w-4 h-4 ml-2" />
               </Button>
-              <Button size="lg" variant="outline" className="h-11 px-6 text-[14px] font-medium">
-                View demo
+              <Button size="lg" variant="outline" className="h-12 px-8 text-base font-medium">
+                Book a demo
               </Button>
             </div>
+            
+            <p className="text-sm text-muted-foreground mt-6">
+              No credit card required • Free forever for individuals
+            </p>
           </div>
         </div>
       </section>
 
       {/* Stats Grid */}
-      <section className="container mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatsCard
-            title="Active members"
-            value={totalMembers}
-            description="In your cohort"
-            icon={Users}
-          />
-          <StatsCard
-            title="Total meetings"
-            value={totalMeetings}
-            description="Scheduled & completed"
-            icon={Calendar}
-            trend={{ value: "+12%", positive: true }}
-          />
-          <StatsCard
-            title="Network coverage"
-            value={`${networkCoverage}%`}
-            description="Of possible connections"
-            icon={Network}
-          />
-          <StatsCard
-            title="This week"
-            value={upcomingMeetings}
-            description="Upcoming meetings"
-            icon={TrendingUp}
-          />
+      <section className="border-t border-border bg-muted/30">
+        <div className="container mx-auto px-6 py-12">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+            <div className="text-center">
+              <div className="text-3xl lg:text-4xl font-bold text-foreground mb-2">{totalMembers}</div>
+              <div className="text-sm text-muted-foreground">Active members</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl lg:text-4xl font-bold text-foreground mb-2">{totalMeetings}</div>
+              <div className="text-sm text-muted-foreground">Total meetings</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl lg:text-4xl font-bold text-foreground mb-2">{networkCoverage}%</div>
+              <div className="text-sm text-muted-foreground">Coverage</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl lg:text-4xl font-bold text-foreground mb-2">{upcomingMeetings}</div>
+              <div className="text-sm text-muted-foreground">This week</div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Main Content */}
-      <section className="container mx-auto px-6 pb-24">
+      <section className="container mx-auto px-6 py-16">
         <Tabs defaultValue="directory" className="space-y-8">
-          <div className="flex items-center justify-between">
-            <TabsList className="h-10 p-1 bg-muted/50 border border-border/50">
-              <TabsTrigger value="directory" className="text-[13px] font-medium px-4 data-[state=active]:bg-background">
+          <div className="border-b border-border">
+            <TabsList className="h-auto p-0 bg-transparent border-0">
+              <TabsTrigger 
+                value="directory" 
+                className="rounded-none border-b-2 border-transparent data-[state=active]:border-foreground data-[state=active]:bg-transparent px-6 py-3"
+              >
                 Directory
               </TabsTrigger>
-              <TabsTrigger value="meetings" className="text-[13px] font-medium px-4 data-[state=active]:bg-background">
+              <TabsTrigger 
+                value="meetings" 
+                className="rounded-none border-b-2 border-transparent data-[state=active]:border-foreground data-[state=active]:bg-transparent px-6 py-3"
+              >
                 Meetings
               </TabsTrigger>
             </TabsList>
           </div>
 
           <TabsContent value="directory" className="space-y-6 mt-8">
-            <div className="flex items-center gap-3">
-              <div className="relative flex-1 max-w-md">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <Input
-                  placeholder="Search members..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 h-10 text-[13px] bg-background border-border/50"
-                />
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div>
+                <h2 className="text-2xl font-semibold text-foreground">Member directory</h2>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Connect with {totalMembers} members in your cohort
+                </p>
               </div>
               
-              <Button variant="outline" className="h-10 px-4 text-[13px] font-medium">
-                Filters
-              </Button>
+              <div className="flex items-center gap-3 w-full sm:w-auto">
+                <div className="relative flex-1 sm:flex-initial sm:w-72">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <Input
+                    placeholder="Search members..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-10 h-10"
+                  />
+                </div>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -215,15 +217,15 @@ const Index = () => {
           </TabsContent>
 
           <TabsContent value="meetings" className="space-y-6 mt-8">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
-                <h2 className="text-[24px] font-semibold text-foreground mb-1">Your meetings</h2>
-                <p className="text-[13px] text-muted-foreground">
-                  {meetings.length} total · {upcomingMeetings} upcoming
+                <h2 className="text-2xl font-semibold text-foreground">Your meetings</h2>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {meetings.length} total • {upcomingMeetings} upcoming
                 </p>
               </div>
               
-              <Button className="h-10 px-4 text-[13px] font-medium bg-foreground hover:bg-foreground/90 text-background">
+              <Button className="h-10 px-5">
                 Log meeting
               </Button>
             </div>
