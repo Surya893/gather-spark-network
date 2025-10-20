@@ -2,6 +2,7 @@ import * as React from "react";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 
 import { cn } from "@/lib/utils";
+import { haptics } from "@/lib/haptics";
 
 const Tabs = TabsPrimitive.Root;
 
@@ -23,16 +24,30 @@ TabsList.displayName = TabsPrimitive.List.displayName;
 const TabsTrigger = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
->(({ className, ...props }, ref) => (
-  <TabsPrimitive.Trigger
-    ref={ref}
-    className={cn(
-      "inline-flex items-center justify-center whitespace-nowrap px-3 py-1.5 text-sm font-medium transition-all data-[state=active]:text-foreground focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50",
-      className,
-    )}
-    {...props}
-  />
-));
+>(({ className, onClick, onMouseEnter, ...props }, ref) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    haptics.light();
+    onClick?.(e);
+  };
+  
+  const handleMouseEnter = (e: React.MouseEvent<HTMLButtonElement>) => {
+    haptics.light();
+    onMouseEnter?.(e);
+  };
+  
+  return (
+    <TabsPrimitive.Trigger
+      ref={ref}
+      className={cn(
+        "inline-flex items-center justify-center whitespace-nowrap px-3 py-1.5 text-sm font-medium transition-all data-[state=active]:text-foreground focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 hover:text-foreground/80",
+        className,
+      )}
+      onClick={handleClick}
+      onMouseEnter={handleMouseEnter}
+      {...props}
+    />
+  );
+});
 TabsTrigger.displayName = TabsPrimitive.Trigger.displayName;
 
 const TabsContent = React.forwardRef<

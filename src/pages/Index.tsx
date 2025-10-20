@@ -117,9 +117,13 @@ const Index = () => {
             </div>
             
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-              Scheduling infrastructure
+              <span className="inline-block hover:text-primary transition-all duration-300 hover:scale-105 cursor-default">
+                Scheduling infrastructure
+              </span>
               <br />
-              for meaningful connections
+              <span className="inline-block text-primary hover:scale-105 transition-all duration-300 cursor-default">
+                for meaningful connections
+              </span>
             </h1>
             
             <p className="text-lg lg:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
@@ -158,21 +162,21 @@ const Index = () => {
       <section className="border-y border-border bg-card">
         <div className="container mx-auto px-6 py-16">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 max-w-5xl mx-auto">
-            <div className="text-center">
-              <div className="text-4xl lg:text-5xl font-bold text-primary mb-2">{totalMembers}</div>
-              <div className="text-sm font-medium text-muted-foreground">Active members</div>
+            <div className="text-center group cursor-default">
+              <div className="text-4xl lg:text-5xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform duration-300">{totalMembers}</div>
+              <div className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300">Active members</div>
             </div>
-            <div className="text-center">
-              <div className="text-4xl lg:text-5xl font-bold text-primary mb-2">{totalMeetings}</div>
-              <div className="text-sm font-medium text-muted-foreground">Total meetings</div>
+            <div className="text-center group cursor-default">
+              <div className="text-4xl lg:text-5xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform duration-300">{totalMeetings}</div>
+              <div className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300">Total meetings</div>
             </div>
-            <div className="text-center">
-              <div className="text-4xl lg:text-5xl font-bold text-primary mb-2">{networkCoverage}%</div>
-              <div className="text-sm font-medium text-muted-foreground">Network coverage</div>
+            <div className="text-center group cursor-default">
+              <div className="text-4xl lg:text-5xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform duration-300">{networkCoverage}%</div>
+              <div className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300">Network coverage</div>
             </div>
-            <div className="text-center">
-              <div className="text-4xl lg:text-5xl font-bold text-primary mb-2">{upcomingMeetings}</div>
-              <div className="text-sm font-medium text-muted-foreground">This week</div>
+            <div className="text-center group cursor-default">
+              <div className="text-4xl lg:text-5xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform duration-300">{upcomingMeetings}</div>
+              <div className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300">This week</div>
             </div>
           </div>
         </div>

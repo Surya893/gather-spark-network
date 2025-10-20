@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, MapPin, MoreHorizontal } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { haptics } from "@/lib/haptics";
 
 interface MeetingCardProps {
   meeting: {
@@ -24,7 +25,10 @@ export const MeetingCard = ({ meeting }: MeetingCardProps) => {
     .toUpperCase();
 
   return (
-    <Card className="group relative p-7 hover:shadow-lg hover:border-primary/50 transition-all duration-200 border-2 bg-card">
+    <Card 
+      className="group relative p-7 hover:shadow-xl hover:border-primary/50 hover:-translate-y-1 transition-all duration-300 border-2 bg-card"
+      onMouseEnter={() => haptics.light()}
+    >
       <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
         <Button variant="ghost" size="icon" className="h-9 w-9 hover:bg-muted">
           <MoreHorizontal className="w-5 h-5" />
@@ -41,7 +45,7 @@ export const MeetingCard = ({ meeting }: MeetingCardProps) => {
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between mb-5">
             <div>
-              <h4 className="text-lg font-bold text-foreground mb-1">{meeting.withName}</h4>
+              <h4 className="text-lg font-bold text-foreground mb-1 group-hover:text-primary transition-colors duration-300">{meeting.withName}</h4>
               <Badge 
                 variant={meeting.status === "upcoming" ? "default" : "secondary"}
                 className={`text-xs font-semibold px-3 py-1 ${

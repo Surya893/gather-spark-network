@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, MoreHorizontal } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { haptics } from "@/lib/haptics";
 
 interface MemberCardProps {
   member: {
@@ -22,7 +23,10 @@ export const MemberCard = ({ member, onSchedule }: MemberCardProps) => {
     .toUpperCase();
 
   return (
-    <Card className="group relative p-7 hover:shadow-lg hover:border-primary/50 transition-all duration-200 border-2 bg-card">
+    <Card 
+      className="group relative p-7 hover:shadow-xl hover:border-primary/50 hover:-translate-y-1 transition-all duration-300 border-2 bg-card"
+      onMouseEnter={() => haptics.light()}
+    >
       <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
         <Button variant="ghost" size="icon" className="h-9 w-9 hover:bg-muted">
           <MoreHorizontal className="w-5 h-5" />
@@ -38,8 +42,8 @@ export const MemberCard = ({ member, onSchedule }: MemberCardProps) => {
           </Avatar>
           
           <div className="flex-1 min-w-0">
-            <h3 className="text-lg font-bold text-foreground truncate mb-1.5">{member.name}</h3>
-            <p className="text-base text-muted-foreground">{member.role}</p>
+            <h3 className="text-lg font-bold text-foreground truncate mb-1.5 group-hover:text-primary transition-colors duration-300">{member.name}</h3>
+            <p className="text-base text-muted-foreground group-hover:text-foreground transition-colors duration-300">{member.role}</p>
           </div>
         </div>
         

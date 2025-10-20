@@ -5,6 +5,7 @@ import { Session, User } from "@supabase/supabase-js";
 import { Menu, LogOut, Users as UsersIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { haptics } from "@/lib/haptics";
 
 export const Navbar = () => {
   const navigate = useNavigate();
@@ -41,22 +42,33 @@ export const Navbar = () => {
         <div className="flex items-center gap-12">
           <div 
             className="flex items-center gap-2.5 cursor-pointer group" 
-            onClick={() => navigate(user ? "/dashboard" : "/")}
+            onClick={() => {
+              haptics.medium();
+              navigate(user ? "/dashboard" : "/");
+            }}
           >
-            <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center group-hover:bg-primary/90 transition-colors">
-              <UsersIcon className="w-5 h-5 text-primary-foreground" />
+            <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center group-hover:bg-primary/90 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/25">
+              <UsersIcon className="w-5 h-5 text-primary-foreground group-hover:rotate-12 transition-transform duration-300" />
             </div>
-            <span className="text-xl font-bold text-foreground">
+            <span className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
               MeetWise
             </span>
           </div>
           
           {user && (
             <div className="hidden lg:flex items-center gap-8">
-              <a href="/dashboard" className="text-base font-medium text-muted-foreground hover:text-primary transition-colors">
+              <a 
+                href="/dashboard" 
+                className="text-base font-medium text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-105"
+                onMouseEnter={() => haptics.light()}
+              >
                 Dashboard
               </a>
-              <a href="/dashboard" className="text-base font-medium text-muted-foreground hover:text-primary transition-colors">
+              <a 
+                href="/dashboard" 
+                className="text-base font-medium text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-105"
+                onMouseEnter={() => haptics.light()}
+              >
                 Analytics
               </a>
             </div>
